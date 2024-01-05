@@ -1,0 +1,12 @@
+{
+  "amazon": {
+    "url": "",
+    "module": "job",
+    "info": "xxx"
+  },
+  "nokia": {
+    "url": "",
+    "module": "job",
+    "info": "xxx"
+  }
+}

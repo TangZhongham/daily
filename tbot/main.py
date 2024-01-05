@@ -1,16 +1,13 @@
-# This is a sample Python script.
-
-# Press ⇧F10 to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
+import sys
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    python_version = sys.version.split()[0]
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    if sys.version_info < (3, 9):
+        print("Sherlock requires Python 3.6+\nYou are using Python %s, which is not supported by Sherlock" % (
+            python_version))
+        sys.exit(1)
+
+    import jarvis
+    jarvis.main()
