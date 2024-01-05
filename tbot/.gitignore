@@ -1,3 +1,4 @@
 # created by virtualenv automatically
 .token
-.idea
+.idea/*
+.__pycache__/*
