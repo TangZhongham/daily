@@ -2,11 +2,19 @@
   "amazon": {
     "url": "",
     "module": "job",
-    "info": "xxx"
+    "info": "data engineer",
+    "use_selenium": false
+  },
+  "amazon": {
+    "url": "",
+    "module": "job",
+    "info": "python",
+    "use_selenium": true
   },
   "nokia": {
     "url": "",
     "module": "job",
-    "info": "xxx"
+    "info": "xxx",
+    "use_selenium": true
   }
 }
