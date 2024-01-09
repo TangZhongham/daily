@@ -62,6 +62,17 @@ class Slides2CheatSheet():
             p = document.add_paragraph('Start:')
             for i in self.slides_text:
                 p.add_run(i)
+            for section in document.sections:
+                header = section.header
+                footer = section.footer
+                header.is_linked_to_previous = True
+                footer.is_linked_to_previous = True
+
+                from docx.shared import Inches
+                section.page_width, section.page_height = Inches(8.5), Inches(11)
+                section.left_margin = Inches(0.1)
+                section.right_margin = Inches(0.1)
+                section.top_margin, section.bottom_margin = 200,200
             document.save('demo.docx')
         print("finished!")
         return
