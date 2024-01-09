@@ -30,8 +30,8 @@ class Slides2CheatSheet():
                             continue
                         for paragraph in shape.text_frame.paragraphs:
                             for run in paragraph.runs:
-                                text_runs.append(run.text)
-                        text_runs.append("\n")
+                                text_runs.append(run.text.replace("\n", " "))
+                text_runs.append("\n")
             self.slides_text = text_runs
         return
 
@@ -49,16 +49,19 @@ class Slides2CheatSheet():
         return slides
 
     def purify(self):
+        # TODO: work on how to purify text in general
         return
 
     def save(self):
+        # TODO: should change general space for a letter to occupy whole page
         if self.slides_text is None:
             pass
         else:
             print("Transfering to docx...")
             document = Document()
+            p = document.add_paragraph('Start:')
             for i in self.slides_text:
-                document.add_paragraph(i)
+                p.add_run(i)
             document.save('demo.docx')
         print("finished!")
         return
