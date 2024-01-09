@@ -3,6 +3,7 @@
 import os
 import argparse
 import sys
+import re
 
 from pptx import Presentation
 from docx import Document
@@ -24,14 +25,21 @@ class Slides2CheatSheet():
             text_runs = []
             for slide in self.slides:
                 prs = Presentation(slide)
+                pattern = r'/([^/]+)\.pptx$'
+                match = re.search(pattern, slide)
+                if match:
+                    # Extract information from the matched group
+                    extracted_text = match.group(1)
+                    text_runs.append(extracted_text+":  ")
                 for slide in prs.slides:
+                    text_runs.append("[")
                     for shape in slide.shapes:
                         if not shape.has_text_frame:
                             continue
                         for paragraph in shape.text_frame.paragraphs:
                             for run in paragraph.runs:
                                 text_runs.append(run.text.replace("\n", " "))
-                text_runs.append("\n")
+                    text_runs.append("]\n")
             self.slides_text = text_runs
         return
 
