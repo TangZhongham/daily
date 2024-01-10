@@ -8,11 +8,15 @@ import re
 from pptx import Presentation
 from docx import Document
 
+from dotenv import load_dotenv
+
+
 
 class Slides2CheatSheet():
-    def __init__(self, slides_dir, slides_num=0):
+    def __init__(self, slides_dir, slides_num=0, ask_chatgpt=False):
         self.slides = None
         self.slides_text = None
+        self.ask_chatgpt = ask_chatgpt
         self.slides_dir = slides_dir
         self.slides_num = slides_num
         print("There are" + str(self.slides_num) + "different slides under dir" + self.slides_dir + ".")
@@ -30,7 +34,7 @@ class Slides2CheatSheet():
                 if match:
                     # Extract information from the matched group
                     extracted_text = match.group(1)
-                    text_runs.append(extracted_text+":  ")
+                    text_runs.append(extracted_text + ":  ")
                 for slide in prs.slides:
                     text_runs.append("[")
                     for shape in slide.shapes:
@@ -60,8 +64,12 @@ class Slides2CheatSheet():
         # TODO: work on how to purify text in general
         return
 
+    def ask_ai(self):
+        # TODO: scraped texts from slides, now could use chatgpt to conclude and purify for me.
+
+        return
+
     def save(self):
-        # TODO: should change general space for a letter to occupy whole page
         if self.slides_text is None:
             pass
         else:
@@ -80,13 +88,15 @@ class Slides2CheatSheet():
                 section.page_width, section.page_height = Inches(8.5), Inches(11)
                 section.left_margin = Inches(0.1)
                 section.right_margin = Inches(0.1)
-                section.top_margin, section.bottom_margin = 200,200
+                section.top_margin, section.bottom_margin = 200, 200
             document.save('demo.docx')
         print("finished!")
         return
 
 
 if __name__ == '__main__':
+    load_dotenv()
+
     parser = argparse.ArgumentParser(description='This program is designed to extract all slides '
                                                  'and put it into one double paged letter sized docx file.')
     test_dir = "./test"

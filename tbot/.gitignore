@@ -3,3 +3,4 @@
 .tbot/idea/*
 .tbot/__pycache__/*
 .tbot/test/*
+.env
